@@ -7,7 +7,7 @@ $id = $_GET["id_konsul"];
 // query data berdasarkan id
 
 $konsul = query("SELECT * FROM konsultasi WHERE id_konsul = $id")[0];
-
+$klien = query("SELECT * FROM klien inner join  konsultasi ON klien.id=konsultasi.id_klien WHERE id_klien='$id'");
 
 ?>
 <!DOCTYPE html>
@@ -29,27 +29,31 @@ $konsul = query("SELECT * FROM konsultasi WHERE id_konsul = $id")[0];
 <div class="main-content-wrapper">
             <div class="main-content">
                 <div class="bot-border">    
-                <h1>Konsultasi 1</h1>
+                <h1>Konsultasi <?= $konsul ["konsul_ke"];  ?></h1>
                 </div>
                 <div class="form-wrapper">
                     <div class="form-header"></div>
                     <div class="form-content">
-                    Konsul ke :<br>
-                    <input type="text" class="input" onfocus="this.blur()" readonly="readonly" placeholder="<?= $konsul ["konsul_ke"];  ?>"><br><br>
+                    <!-- Konsul ke :<br>
+                    <input type="text" class="input" onfocus="this.blur()" readonly="readonly" placeholder="<?= $konsul ["konsul_ke"];  ?>"><br><br> -->
                 
                     Tanggal :<br>
                     <input type="text" class="input" onfocus="this.blur()" readonly="readonly" placeholder="<?= $konsul ["hari_tanggal"];  ?>"><br><br>
                     
-                    Tanggal :<br>
+                    Tujuan :<br>
                     <input type="text" class="input" onfocus="this.blur()" readonly="readonly" placeholder="<?= $konsul ["Tujuan"];  ?>"><br><br>
                     
-                    Tanggal :<br>
+                    Hasil Konsul :<br>
                     <textarea type="text" class="input-lg" onfocus="this.blur()" readonly="readonly" placeholder="<?= $konsul ["hasil_konsul"];  ?>"></textarea><br>
                     
-                    Tanggal :<br>
+                    Catatan :<br>
                     <textarea type="text" class="input-lg" onfocus="this.blur()" readonly="readonly" placeholder="<?= $konsul ["catatan_konsul"];  ?>"></textarea><br>
-                
-  
+                    
+                    <div class="button-wrapper">
+                    <button onclick="history.go(-1);"class="button-edit">Kembali</button>
+                            <a href="ubahkonsul.php?id_konsul=<?= $konsul["id_konsul"]; ?>"><div class="button-edit"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit</div></a>
+                        </div>
+                   
                         </div>
                     </div>
                 </div>
